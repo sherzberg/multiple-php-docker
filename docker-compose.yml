@@ -1,0 +1,11 @@
+nginx:
+    build: nginx
+    ports:
+        - "8000:80"
+    links:
+        - api
+
+api:
+    build: api
+    ports:
+        - "9000:9000"
