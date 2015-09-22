@@ -13,5 +13,5 @@ $ docker-compose up
 Now the nginx webserver is running so we can access it via:
 
 ```bash
-$ curl localhost:8000
+$ curl localhost:8000/todos
 ```
