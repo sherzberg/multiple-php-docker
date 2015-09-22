@@ -1,5 +1,7 @@
 FROM php:5.6-fpm
 
+WORKDIR /var/www
+
 # Install modules
 RUN apt-get update && apt-get install -y \
         libfreetype6-dev \
@@ -14,6 +16,13 @@ RUN apt-get update && apt-get install -y \
     && docker-php-ext-install mbstring zip intl
 
 RUN echo "date.timezone=America/Chicago" > /usr/local/etc/php/conf.d/docker-php-ext-datetime.ini
+
+RUN curl -sS https://getcomposer.org/installer | php
+RUN ln -s /var/www/composer.phar /usr/local/bin/composer
+RUN chmod +x /usr/local/bin/composer
+
+ADD composer.json /var/www/
+RUN composer install
 
 ADD . /var/www/
 
